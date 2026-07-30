@@ -20,7 +20,7 @@ load_dotenv()
 SUPPORTED_PROVIDERS = {"gemini", "groq", "openai", "anthropic", "deepseek", "huggingface"}
 
 DEFAULT_MODELS = {
-    "gemini": "gemini-2.5-flash",
+    "gemini": "gemini-2.0-flash",
     "groq": "llama-3.3-70b-versatile",
     "openai": "gpt-4o-mini",
     "anthropic": "claude-3-5-sonnet-latest",
@@ -43,6 +43,7 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
         extra="ignore"
     )
+    PROJECT_NAME: str = "InternOps AI Service"
 
     # Strategy Configuration
     PRIMARY_AI_PROVIDER: str = "gemini"
