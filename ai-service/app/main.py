@@ -1,11 +1,16 @@
 from fastapi import FastAPI
 from app.core.config import settings
 from app.api.v1.endpoints.certificates import router as certificates_router
+from app.api.ai_routes import router as ai_router
+from app.api.v1.endpoints.health import router as health_router
 
 app = FastAPI(
     title=settings.PROJECT_NAME
 )
 app.include_router(certificates_router, prefix="/certificates", tags=["Certificates"])
+
+app.include_router(ai_router)
+app.include_router(health_router)
 
 @app.get("/")
 async def root():
