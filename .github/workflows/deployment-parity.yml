@@ -80,9 +80,9 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           git diff --name-status --find-renames "$BASE_SHA"...HEAD -- backend/migrations > /tmp/migration-diff.txt
-          cat /tmp/migration-diff.txt
-          allowed_corrections='R000 backend/migrations/055_keyset_pagination_indexes.sql backend/migrations/056_keyset_pagination_indexes.sql
-R000 backend/migrations/057_task_prerequisites.sql backend/migrations/058_task_prerequisites.sql'
+          allowed_corrections=$(printf '%s\n%s' \
+            'R000 backend/migrations/055_keyset_pagination_indexes.sql backend/migrations/056_keyset_pagination_indexes.sql' \
+            'R000 backend/migrations/057_task_prerequisites.sql backend/migrations/058_task_prerequisites.sql')
           normalized_diff=$(tr '\t' ' ' < /tmp/migration-diff.txt | tr -s ' ' | sed '/^$/d')
           disallowed_diff=$(printf '%s\n' "$normalized_diff" | awk -v allowed="$allowed_corrections" '
             BEGIN {
