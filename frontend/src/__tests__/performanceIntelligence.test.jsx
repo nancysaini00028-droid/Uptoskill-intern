@@ -125,9 +125,9 @@ describe('GitHub Issue #2068: PerformanceIntelligence async cancellation and cle
 
     await waitFor(() => {
       expect(screen.getByText(/Alice Johnson/)).toBeInTheDocument();
+      expect(intern1Signal).toBeDefined();
     });
 
-    expect(intern1Signal).toBeDefined();
     expect(intern1Signal.aborted).toBe(false);
 
     // Switch intern to intern-2
